@@ -1,0 +1,13 @@
+{
+    "usernameLocator": "input[placeholder='Firstname.Lastname']",
+    "passwordLocator": "input[placeholder='Password']",
+    "tokenLocator": "input[placeholder='Token']",
+    "nameLocator": "li[class='nav-item pr-2']",
+    "roleLocator": "li[class='nav-item pl-2 pr-2']:nth-child(3)",
+    "loginButtonLocator":".btn.rounded-btn",
+    "tellerDetails": ["Ikechukwu.Adindu", "Ani-j@@2222@@##", "16203"],  
+    "approverDetails": ["Adebowale.Adeyeba", "ESideRmENENACY@2024##", "9377"]
+
+    
+
+}

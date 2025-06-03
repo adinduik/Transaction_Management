@@ -1,0 +1,182 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 5,
+    "passes": 5,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-08-29T11:08:53.122Z",
+    "end": "2024-08-29T11:09:23.366Z",
+    "duration": 30244,
+    "testsRegistered": 5,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "dc338d97-4402-4866-9090-0710ebe17d76",
+      "title": "",
+      "fullFile": "cypress\\integration\\examples\\01 Login.js",
+      "file": "cypress\\integration\\examples\\01 Login.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "5e3c2cbf-5804-4463-ac4b-2e2c86429577",
+          "title": "Login Test Suite",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Page Launch",
+              "fullTitle": "Login Test Suite Page Launch",
+              "timedOut": null,
+              "duration": 5191,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(Cypress.env('url') + '/login/'); // Launch Page\ncy.pagetitle(); // Validate Page Title",
+              "err": {},
+              "uuid": "69b1668d-721a-49e5-8882-a666786d0bb8",
+              "parentUUID": "5e3c2cbf-5804-4463-ac4b-2e2c86429577",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Teller Login",
+              "fullTitle": "Login Test Suite Teller Login",
+              "timedOut": null,
+              "duration": 5468,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const loginpage = new _Loginpage.default(); // Create instance of Page objects stored on Loginpage.js\ncy.visit(Cypress.env('url') + '/login/'); // Launch Page\nloginpage.inputUsername().type(this.data.tellerdetails[0]); // Input Username\nloginpage.inputPassword().type(this.data.tellerdetails[1]); // Input Password\nloginpage.inputUserToken().type(this.data.token); // Input Token\nloginpage.loginsubmit().click(); // Login\ncy.wait(3000);\ncy.uservalidation(this.data.tellerdetails[0]); // Validate Teller Name\ncy.tellerRolevalidation(); // Validate Role\nloginpage.logout().click(); // Logout\ncy.wait(1000);",
+              "err": {},
+              "uuid": "0a73fe3e-7076-47e5-81e3-40aa5e2c82ed",
+              "parentUUID": "5e3c2cbf-5804-4463-ac4b-2e2c86429577",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Approver Login",
+              "fullTitle": "Login Test Suite Approver Login",
+              "timedOut": null,
+              "duration": 7846,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const loginpage = new _Loginpage.default();\ncy.visit(Cypress.env('url') + '/login/'); // Launch Page\nloginpage.inputUsername().type(this.data.approverdetails[0]); // Input Username\nloginpage.inputPassword().type(this.data.approverdetails[1]); // Input Password\nloginpage.inputUserToken().type(this.data.token); // Input Token\nloginpage.loginsubmit().click();\ncy.wait(3000);\ncy.uservalidation(this.data.approverdetails[0]); // Validate Approver Name\ncy.approverRolevalidation(); // Validate Role\nloginpage.logout().click(); // Logout\ncy.wait(2000);",
+              "err": {},
+              "uuid": "0ad2b875-9cb0-4353-bf1d-1ae143112504",
+              "parentUUID": "5e3c2cbf-5804-4463-ac4b-2e2c86429577",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Admin Login",
+              "fullTitle": "Login Test Suite Admin Login",
+              "timedOut": null,
+              "duration": 6604,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const loginpage = new _Loginpage.default();\ncy.visit(Cypress.env('url') + '/login/'); // Launch Page\nloginpage.inputUsername().type(this.data.admindetails[0]); // Input Username\nloginpage.inputPassword().type(this.data.admindetails[1]); // Input Password\nloginpage.inputUserToken().type(this.data.token); // Input Token\nloginpage.loginsubmit().click();\ncy.wait(3000);\ncy.uservalidation(this.data.admindetails[0]); // Validate Approver Name\ncy.adminRolevalidation(); // Validate Role\nloginpage.logout().click(); // Logout\ncy.wait(1000);",
+              "err": {},
+              "uuid": "8883ac4a-2ce0-4fa4-8ff2-9b07cab53a7b",
+              "parentUUID": "5e3c2cbf-5804-4463-ac4b-2e2c86429577",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Password Eye",
+              "fullTitle": "Login Test Suite Password Eye",
+              "timedOut": null,
+              "duration": 2297,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const loginpage = new _Loginpage.default();\ncy.visit(Cypress.env('url') + '/login/'); // Launch Page\nloginpage.inputUsername().type(this.data.admindetails[0]); // Input Username\nloginpage.inputPassword().type(this.data.admindetails[1]); // Input Password\nloginpage.inputPassword().should('have.attr', 'type', 'password');\nloginpage.passwordeye().click();\nloginpage.inputPassword().should('have.attr', 'type', 'text');",
+              "err": {},
+              "uuid": "59c6d86c-93e5-44dc-870b-998e0e97cd78",
+              "parentUUID": "5e3c2cbf-5804-4463-ac4b-2e2c86429577",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "69b1668d-721a-49e5-8882-a666786d0bb8",
+            "0a73fe3e-7076-47e5-81e3-40aa5e2c82ed",
+            "0ad2b875-9cb0-4353-bf1d-1ae143112504",
+            "8883ac4a-2ce0-4fa4-8ff2-9b07cab53a7b",
+            "59c6d86c-93e5-44dc-870b-998e0e97cd78"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 27406,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": true,
+        "html": true,
+        "json": true,
+        "timestamp": "mmddyyyy_HHMMss"
+      },
+      "version": "6.2.0"
+    }
+  }
+}
