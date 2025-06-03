@@ -65,14 +65,6 @@ Cypress.Commands.add('approverLogin', () => {
     
 })
 
-Cypress.Commands.add('adminLogin', () => {
-    cy.visit('http://adminhitl-001-site15.ctempurl.com/login')
-    cy.get('input[name="username"]').type('Onyekachi.Okosun')
-    cy.get('input[name="password"]').type('%Ony51k6ch&')
-    cy.get('input[name="token"]').type('101010')
-    cy.get('button[type="submit"]').click()
-    
-})
 
 Cypress.Commands.add('logOut', () => {
     
