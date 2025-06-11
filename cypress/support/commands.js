@@ -119,9 +119,9 @@ Cypress.Commands.add('selectCashDeposit', () => {
 
 Cypress.Commands.add('transactionBreakdown', (tranbreakdown) => {
     
-    cy.get('table tbody[class="ng-tns-c13-29 ng-star-inserted"]:nth-child(2) tr').each(($el, index, $list)=>{
+    cy.get('table tbody:nth-child(2) tr').each(($el, index, $list)=>{
 
-        var denomination = $el.find('td:nth-child(1)').text()
+        var denomination = $el.find('td:nth-child(1) input').text()
 
         if(denomination==='1000'){
 

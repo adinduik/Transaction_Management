@@ -15,6 +15,8 @@ describe("Cash Deposit Test Suite", function(){
     it("Cash Deposit Within Teller Limit", ()=>{
         cy.pageLaunch()
         cy.tellerLogin()
+        cy.initiateCashDeposit()
+        cy.confirmCashDeposit()
 
 
 
