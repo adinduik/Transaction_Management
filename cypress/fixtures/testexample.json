@@ -1,12 +1,33 @@
 {
-    "usernameLocator": "input[placeholder='Firstname.Lastname']",
+    
+    "_comment": "These are Locators",
+
+
+    "usernameLocator": "input[placeholder='Firstname.Lastname']", 
     "passwordLocator": "input[placeholder='Password']",
     "tokenLocator": "input[placeholder='Token']",
     "nameLocator": "li[class='nav-item pr-2']",
     "roleLocator": "li[class='nav-item pl-2 pr-2']:nth-child(3)",
     "loginButtonLocator":".btn.rounded-btn",
+    "cashDepositLocator": "a[href='/deposit/cash-deposit']",
+    "depositAccountNumberLocator": "input[name= 'acct']",
+    "accountNumberValidatorLocator": "button[class='btn btn-outline-secondary fa fa-search ng-tns-c13-21 ng-star-inserted']",
+    "accountOwnerSelectorLocator": "input[value='Y']",
+    "depositAmountLocator": "input[name='wthAmount']",
+    "postTransactionLocator": ".col-sm-12.btn.btn-primary",
+    "confirmTransactionLocator": ".btn.btn-primary.btn-sm.btn-block",
+
+
+
+
+    "_comment1": "These are Data Values",
+
+
     "tellerDetails": ["Ikechukwu.Adindu", "Ani-j@@2222@@##", "16203"],  
-    "approverDetails": ["Adebowale.Adeyeba", "ESideRmENENACY@2024##", "9377"]
+    "approverDetails": ["Adebowale.Adeyeba", "ESideRmENENACY@2024##", "9377"],
+    "depositAccountNumber": "9123719014",
+    "belowLimitDepositAmount": "150000",
+    "belowLimitAmountBreakdown": ["150", "0", "0", "0", "0", "0", "0", "0", "0", "0"]
 
     
 

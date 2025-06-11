@@ -111,14 +111,91 @@ Cypress.Commands.add('approverRoleValidation', () => {
     
 
 
-Cypress.Commands.add('adminRolevalidation', () => {
+Cypress.Commands.add('selectCashDeposit', () => {
     
-    cy.get('.sc-kbdFaq').then(($role)=>{
-                expect($role.text()).to.include('OpsSystemControl')
-            })
+    cy.get(testData.cashDepositLocator).click({force:true})
         
 })
-           
+
+Cypress.Commands.add('transactionBreakdown', (tranbreakdown) => {
+    
+    cy.get('table tbody[class="ng-tns-c13-29 ng-star-inserted"]:nth-child(2) tr').each(($el, index, $list)=>{
+
+        var denomination = $el.find('td:nth-child(1)').text()
+
+        if(denomination==='1000'){
+
+            cy.get('td:nth-child(2) input').eq(index).type(tranbreakdown[0])
+        }
+
+        else if (denomination==='500'){
+
+            cy.get('td:nth-child(2) input').eq(index).type(tranbreakdown[1])
+        }
+
+        else if (denomination==='200'){
+
+            cy.get('td:nth-child(2) input').eq(index).type(tranbreakdown[2])
+        }
+
+        else if (denomination==='100'){
+
+            cy.get('td:nth-child(2) input').eq(index).type(tranbreakdown[3])
+        }
+
+        else if (denomination==='50'){
+
+            cy.get('td:nth-child(2) input').eq(index).type(tranbreakdown[4])
+        }
+
+        else if (denomination==='20'){
+
+            cy.get('td:nth-child(2) input').eq(index).type(tranbreakdown[5])
+        }
+
+        else if (denomination==='10'){
+
+            cy.get('td:nth-child(2) input').eq(index).type(tranbreakdown[6])
+        }
+
+        else if (denomination==='5'){
+
+            cy.get('td:nth-child(2) input').eq(index).type(tranbreakdown[7])
+        }
+        
+        else if (denomination==='1'){
+
+            cy.get('td:nth-child(2) input').eq(index).type(tranbreakdown[8])
+        }
+
+        else if (denomination.contains('kobo/pence/cent')){
+
+            cy.get('td:nth-child(2) input').eq(index).type(tranbreakdown[9])
+        }
+    })
+        
+})
+    
+
+
+Cypress.Commands.add('initiateCashDeposit', () => {
+    
+    cy.get(testData.depositAccountNumberLocator).type(testData.depositAccountNumber)
+    cy.get(testData.accountNumberValidatorLocator).click()
+    cy.get(testData.accountOwnerSelectorLocator).select()
+    cy.get(testData.depositAmountLocator).type(testData.belowLimitDepositAmount)
+    cy.transactionBreakdown(testData.belowLimitAmountBreakdown)
+    cy.get(testData.postTransactionLocator).contains(' Post Transaction ').click()
+        
+})
+
+
+Cypress.Commands.add('confirmCashDeposit', () => {
+    
+    cy.get(testData.confirmTransactionLocator).click()
+    
+        
+})
 
 
 
@@ -152,55 +229,7 @@ Cypress.Commands.add('getInstrumentDate', (instrumentDate) => {
     
 })
 
-Cypress.Commands.add('transactionBreakdown', (tranbreakdown) => {
-    
-    cy.get('.sc-ljhsyB').each(($el, index, $list)=>{
 
-        var denomination = $el.find('p.sc-eKxxib').text()
-
-        if(denomination==='1000'){
-
-            cy.get('div div input.sc-fxbaO').eq(index).type(tranbreakdown[0])
-        }
-
-        else if (denomination==='500'){
-
-            cy.get('div div input.sc-fxbaO').eq(index).type(tranbreakdown[1])
-        }
-
-        else if (denomination==='200'){
-
-            cy.get('div div input.sc-fxbaO').eq(index).type(tranbreakdown[2])
-        }
-
-        else if (denomination==='100'){
-
-            cy.get('div div input.sc-fxbaO').eq(index).type(tranbreakdown[3])
-        }
-
-        else if (denomination==='50'){
-
-            cy.get('div div input.sc-fxbaO').eq(index).type(tranbreakdown[4])
-        }
-
-        else if (denomination==='20'){
-
-            cy.get('div div input.sc-fxbaO').eq(index).type(tranbreakdown[5])
-        }
-
-        else if (denomination==='10'){
-
-            cy.get('div div input.sc-fxbaO').eq(index).type(tranbreakdown[6])
-        }
-
-        else if (denomination==='5'){
-
-            cy.get('div div input.sc-fxbaO').eq(index).type(tranbreakdown[7])
-        }
-        
-    })
-        
-})
 
 Cypress.Commands.add('totalvalidation', (newtotal) => {
     
