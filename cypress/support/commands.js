@@ -220,56 +220,12 @@ Cypress.Commands.add('totalvalidation', (newtotal) => {
         
 })
 
-Cypress.Commands.add('postingValidationbelowlimit', () => {
-    
-    cy.get('div p').each(($confirmationtext, index, $list)=>{
-
-        if($confirmationtext.text().includes('I have read through all details displayed above and have ensured the information is accurate.')){
-
-            cy.get('section div input[type="radio"]').click()
-            cy.get('div.sc-jZSfwv button').click()
-            cy.wait(2000)
-        }
-    })
-        
-})
-
-Cypress.Commands.add('postingValidationabovelimit', () => {
-    
-    cy.get('div p').each(($confirmationtext, index, $list)=>{
-
-        if($confirmationtext.text().includes('I have read through all details displayed above and have ensured the information is accurate.')){
-
-            cy.get('section div input[type="radio"]').click()
-            cy.get('div.sc-jZSfwv button').click()
-            cy.wait(2000)
-            cy.get('div.sc-dMGEXm div p').eq(1).should('have.text', 'Transaction sent for approval')
-            cy.get('.sc-dzwvnd svg').click()
-        }
-    })
-        
-})
 
 
-Cypress.Commands.add('selectApprovalTransaction', ($approvalamount) => {
-    
-    cy.get('tr td.sc-hJwLUj:nth-child(3)').each(($el, index, $list)=>{
-
-        const approvalamounttext = $el.text()
-        var apprAmount = approvalamounttext.replace(/,/g, '') 
-                                            .replace(/NGN\s*/, ''); 
-        var approvalAmount = parseInt(apprAmount, 10)
-        
-
-        if(approvalAmount===Number($approvalamount)){
-
-            cy.get('button.sc-IFHok').eq(index).click({force:true})
-        }
 
 
-})
-        
-})
+
+
 
         
     
