@@ -14,12 +14,12 @@
 
 //
 
-import LoginPage from '../integration/PageObjects/Loginpage.js'
+
 
 let testData
 
 before(function(){
-    // Import data from example.json file
+    // Import data from testexample.json file
 
     cy.fixture('testexample').then(function(data){
 
@@ -42,25 +42,25 @@ Cypress.Commands.add('pageLaunch', () => {
   
 
 Cypress.Commands.add('tellerLogin', () => {
-    const loginpage = new LoginPage()
+    
 
     cy.get(testData.usernameLocator).type(testData.tellerDetails[0])
     cy.get(testData.passwordLocator).type(testData.tellerDetails[1])
     cy.get(testData.tokenLocator).type(testData.tellerDetails[2])
     cy.get(testData.loginButtonLocator).click()
-    cy.wait(3000)
+    cy.wait(1500)
     
     
 })
 
 Cypress.Commands.add('approverLogin', () => {
-    const loginpage = new LoginPage()
+    
 
     cy.get(testData.usernameLocator).type(testData.approverDetails[0])
     cy.get(testData.passwordLocator).type(testData.approverDetails[1])
     cy.get(testData.tokenLocator).type(testData.approverDetails[2])
     cy.get(testData.loginButtonLocator).click()
-    cy.wait(3000)
+    cy.wait(1500)
     
     
 })
@@ -68,7 +68,7 @@ Cypress.Commands.add('approverLogin', () => {
 
 Cypress.Commands.add('logOut', () => {
     
-    cy.get('.btn.btn-link.pl-2.pr-2').click()
+    cy.get('.btn.btn-link.pl-2.pr-2').click({force:true})
     cy.url().should('include', '/login')
     cy.wait(2000)
 
@@ -117,61 +117,13 @@ Cypress.Commands.add('selectCashDeposit', () => {
         
 })
 
-Cypress.Commands.add('transactionBreakdown', (tranbreakdown) => {
+Cypress.Commands.add('transactionBreakdown', (breakdown) => {
     
-    cy.get('table tbody:nth-child(2) tr').each(($el, index, $list)=>{
-
-        var denomination = $el.find('td:nth-child(1) input').text()
-
-        if(denomination==='1000'){
-
-            cy.get('td:nth-child(2) input').eq(index).type(tranbreakdown[0])
-        }
-
-        else if (denomination==='500'){
-
-            cy.get('td:nth-child(2) input').eq(index).type(tranbreakdown[1])
-        }
-
-        else if (denomination==='200'){
-
-            cy.get('td:nth-child(2) input').eq(index).type(tranbreakdown[2])
-        }
-
-        else if (denomination==='100'){
-
-            cy.get('td:nth-child(2) input').eq(index).type(tranbreakdown[3])
-        }
-
-        else if (denomination==='50'){
-
-            cy.get('td:nth-child(2) input').eq(index).type(tranbreakdown[4])
-        }
-
-        else if (denomination==='20'){
-
-            cy.get('td:nth-child(2) input').eq(index).type(tranbreakdown[5])
-        }
-
-        else if (denomination==='10'){
-
-            cy.get('td:nth-child(2) input').eq(index).type(tranbreakdown[6])
-        }
-
-        else if (denomination==='5'){
-
-            cy.get('td:nth-child(2) input').eq(index).type(tranbreakdown[7])
-        }
+    cy.get('table:nth-child(1) tbody tr').each(($ele, index)=>{
         
-        else if (denomination==='1'){
+        cy.wrap($ele).find('td:nth-child(2) input').type(breakdown[index])
 
-            cy.get('td:nth-child(2) input').eq(index).type(tranbreakdown[8])
-        }
-
-        else if (denomination.contains('kobo/pence/cent')){
-
-            cy.get('td:nth-child(2) input').eq(index).type(tranbreakdown[9])
-        }
+        
     })
         
 })
@@ -182,18 +134,39 @@ Cypress.Commands.add('initiateCashDeposit', () => {
     
     cy.get(testData.depositAccountNumberLocator).type(testData.depositAccountNumber)
     cy.get(testData.accountNumberValidatorLocator).click()
-    cy.get(testData.accountOwnerSelectorLocator).select()
+    cy.get(testData.accountOwnerSelectorLocator).check().should('be.checked')
     cy.get(testData.depositAmountLocator).type(testData.belowLimitDepositAmount)
     cy.transactionBreakdown(testData.belowLimitAmountBreakdown)
+    cy.wait(1000)
     cy.get(testData.postTransactionLocator).contains(' Post Transaction ').click()
-        
+     
 })
 
 
 Cypress.Commands.add('confirmCashDeposit', () => {
     
     cy.get(testData.confirmTransactionLocator).click()
+    cy.get(testData.receiptLocator,{timeout: 30000}).scrollIntoView().should('be.visible')
+        
+})
+
+
+Cypress.Commands.add('initiateCashDepositAboveLimit', () => {
     
+    cy.get(testData.depositAccountNumberLocator).type(testData.depositAccountNumber)
+    cy.get(testData.accountNumberValidatorLocator).click()
+    cy.get(testData.accountOwnerSelectorLocator).check().should('be.checked')
+    cy.get(testData.depositAmountLocator).type(testData.aboveLimitDepositAmount)
+    cy.transactionBreakdown(testData.aboveLimitAmountBreakdown)
+    cy.wait(1000)
+    cy.get(testData.postTransactionLocator).contains(' Post Transaction ').click()
+     
+})
+
+Cypress.Commands.add('confirmCashDepositAboveLimit', () => {
+    
+    cy.get(testData.confirmTransactionLocator).click()
+    cy.get(testData.approvalLocator,{timeout: 1000}).should('include.text', 'The amount exceeds allowed limit')
         
 })
 

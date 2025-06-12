@@ -2,7 +2,7 @@ let testData;
 
 describe ("Login Test Suite", function(){
     before(function(){
-        // Import data from example.json file
+        // Import data from testexample.json file
 
         cy.fixture('testexample').then((data)=>{
 

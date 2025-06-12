@@ -11,11 +11,13 @@
     "loginButtonLocator":".btn.rounded-btn",
     "cashDepositLocator": "a[href='/deposit/cash-deposit']",
     "depositAccountNumberLocator": "input[name= 'acct']",
-    "accountNumberValidatorLocator": "button[class='btn btn-outline-secondary fa fa-search ng-tns-c13-21 ng-star-inserted']",
+    "accountNumberValidatorLocator": ".btn.btn-outline-secondary.fa.fa-search",
     "accountOwnerSelectorLocator": "input[value='Y']",
     "depositAmountLocator": "input[name='wthAmount']",
     "postTransactionLocator": ".col-sm-12.btn.btn-primary",
     "confirmTransactionLocator": ".btn.btn-primary.btn-sm.btn-block",
+    "receiptLocator":"div.modal-content div.mb-5.pb-5 div.modal-body.receipt_font",
+    "approvalLocator": "div.modal-body.text-white.bg-danger.ng-star-inserted",
 
 
 
@@ -26,8 +28,10 @@
     "tellerDetails": ["Ikechukwu.Adindu", "Ani-j@@2222@@##", "16203"],  
     "approverDetails": ["Adebowale.Adeyeba", "ESideRmENENACY@2024##", "9377"],
     "depositAccountNumber": "9123719014",
-    "belowLimitDepositAmount": "150000",
-    "belowLimitAmountBreakdown": ["150", "0", "0", "0", "0", "0", "0", "0", "0", "0"]
+    "belowLimitDepositAmount": "100000",
+    "belowLimitAmountBreakdown": ["100", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+    "aboveLimitDepositAmount": "520000",
+    "aboveLimitAmountBreakdown": ["520", " ", " ", " ", " ", " ", " ", " ", " ", " "]    
 
     
 
