@@ -56,8 +56,8 @@ Cypress.Commands.add('tellerLogin', () => {
 Cypress.Commands.add('approverLogin', () => {
     
 
-    cy.get(testData.usernameLocator).type(testData.approverDetails[0])
-    cy.get(testData.passwordLocator).type(testData.approverDetails[1])
+    cy.get(testData.usernameLocator).type(testData.tellerDetails[0])
+    cy.get(testData.passwordLocator).type(testData.tellerDetails[1])
     cy.get(testData.tokenLocator).type(testData.approverDetails[2])
     cy.get(testData.loginButtonLocator).click()
     cy.wait(1500)
@@ -130,11 +130,37 @@ Cypress.Commands.add('transactionBreakdown', (breakdown) => {
     
 
 
+Cypress.Commands.add('initiateCashDepositSelfDeposit', () => {
+    
+    cy.get(testData.depositAccountNumberLocator).type(testData.depositAccountNumber)
+    cy.get(testData.accountNumberValidatorLocator).scrollIntoView().should('be.visible').click()
+    cy.get(testData.accountOwnerNameLocator).scrollIntoView().should('be.visible').then(($accountOwner)=>{
+        const accountOwnerText = $accountOwner.text().trim()
+        cy.wrap(accountOwnerText).should('include', testData.accountOwnerName)
+        
+    })
+    cy.get(testData.accountOwnerSelectorLocator).check().should('be.checked')
+    cy.get(testData.depositAmountLocator).type(testData.belowLimitDepositAmount)
+    cy.transactionBreakdown(testData.belowLimitAmountBreakdown)
+    cy.wait(1000)
+    cy.get(testData.postTransactionLocator).contains(' Post Transaction ').click()
+     
+})
+
+
 Cypress.Commands.add('initiateCashDeposit', () => {
     
     cy.get(testData.depositAccountNumberLocator).type(testData.depositAccountNumber)
-    cy.get(testData.accountNumberValidatorLocator).click()
-    cy.get(testData.accountOwnerSelectorLocator).check().should('be.checked')
+    cy.get(testData.accountNumberValidatorLocator).scrollIntoView().should('be.visible').click()
+    cy.get(testData.accountOwnerNameLocator).scrollIntoView().should('be.visible').then(($accountOwner)=>{
+        const accountOwnerText = $accountOwner.text().trim()
+        cy.wrap(accountOwnerText).should('include', testData.accountOwnerName)
+        
+    })
+    cy.get(testData.accountOwnerSelectorLocatorNo).check().should('be.checked')
+    cy.get(testData.depositorFirstNameLocator).type(testData.depositorFirstName)
+    cy.get(testData.depositorLastNameLocator).type(testData.depositorLastName)
+    cy.get(testData.depositorPhoneNumberLocator).type(testData.depositorPhoneNumber)
     cy.get(testData.depositAmountLocator).type(testData.belowLimitDepositAmount)
     cy.transactionBreakdown(testData.belowLimitAmountBreakdown)
     cy.wait(1000)
@@ -151,11 +177,37 @@ Cypress.Commands.add('confirmCashDeposit', () => {
 })
 
 
+Cypress.Commands.add('initiateCashDepositAboveLimitSelfDeposit', () => {
+    
+    cy.get(testData.depositAccountNumberLocator).type(testData.depositAccountNumber)
+    cy.get(testData.accountNumberValidatorLocator).scrollIntoView().should('be.visible').click()
+    cy.get(testData.accountOwnerNameLocator).scrollIntoView().should('be.visible').then(($accountOwner)=>{
+        const accountOwnerText = $accountOwner.text().trim()
+        cy.wrap(accountOwnerText).should('include', testData.accountOwnerName)
+        
+    })
+    cy.get(testData.accountOwnerSelectorLocator).check().should('be.checked')
+    cy.get(testData.depositAmountLocator).type(testData.aboveLimitDepositAmount)
+    cy.transactionBreakdown(testData.aboveLimitAmountBreakdown)
+    cy.wait(1000)
+    cy.get(testData.postTransactionLocator).contains(' Post Transaction ').click()
+     
+})
+
+
 Cypress.Commands.add('initiateCashDepositAboveLimit', () => {
     
     cy.get(testData.depositAccountNumberLocator).type(testData.depositAccountNumber)
-    cy.get(testData.accountNumberValidatorLocator).click()
-    cy.get(testData.accountOwnerSelectorLocator).check().should('be.checked')
+    cy.get(testData.accountNumberValidatorLocator).scrollIntoView().should('be.visible').click()
+    cy.get(testData.accountOwnerNameLocator).scrollIntoView().should('be.visible').then(($accountOwner)=>{
+        const accountOwnerText = $accountOwner.text().trim()
+        cy.wrap(accountOwnerText).should('include', testData.accountOwnerName)
+        
+    })
+    cy.get(testData.accountOwnerSelectorLocatorNo).check().should('be.checked')
+    cy.get(testData.depositorFirstNameLocator).type(testData.depositorFirstName)
+    cy.get(testData.depositorLastNameLocator).type(testData.depositorLastName)
+    cy.get(testData.depositorPhoneNumberLocator).type(testData.depositorPhoneNumber)
     cy.get(testData.depositAmountLocator).type(testData.aboveLimitDepositAmount)
     cy.transactionBreakdown(testData.aboveLimitAmountBreakdown)
     cy.wait(1000)
@@ -171,6 +223,102 @@ Cypress.Commands.add('confirmCashDepositAboveLimit', () => {
 })
 
 
+Cypress.Commands.add('transactionIdExtraction', () => {
+    
+    cy.get('div.modal-body.text-white.bg-danger.ng-star-inserted').then(($id)=>{
+
+        const approvaltext = $id.text()
+        var transactionIdtext = approvaltext.split(":")
+        var transactionIdtext1 = transactionIdtext[1].trim()
+        var transactionId2 = transactionIdtext1.split(" ")
+        var transactionId = transactionId2[0].trim()
+
+
+        cy.readFile('cypress/fixtures/testexample.json').then((data) => {
+            const updatedData = {
+              ...data,
+              transactionID: transactionId,
+            };
+    
+            cy.writeFile('cypress/fixtures/testexample.json', updatedData);
+          })
+
+
+    })
+        
+})
+
+
+Cypress.Commands.add('selectCashDepositApproval', () => {
+
+    cy.get(testData.approvalLimitLocator).click()
+    cy.get(testData.cashDepositLimitLocator).click({force:true})
+    cy.wait(2000)
+        
+})
+
+Cypress.Commands.add('cashDepositDecline', () => {
+    cy.readFile('cypress/fixtures/testexample.json').then((data) => {
+      const transactionID = data.transactionID
+      
+  
+      cy.get(testData.receiptNumberLocator).each(($row) => {
+        
+  
+        cy.wrap($row).find('td:nth-child(3)').invoke('text').then((receiptnumbertext) => {
+          const receiptnumber = receiptnumbertext.trim()
+  
+          if (receiptnumber === transactionID) {
+            
+  
+            cy.wrap($row).find('td:nth-child(1) .btn.btn-primary.btn-sm').click({ force: true })
+              cy.get(testData.confirmationModalTitleLocator, { timeout: 10000 })
+                .should('be.visible')
+                .and('contain.text', 'Transaction Details')
+  
+              cy.get(testData.declineButtonLocator).click()
+              cy.get(testData.declineModalLocator).should('contain.text', 'Reason for decline')
+              cy.get('div div div.card-body p.card-text textarea').type('ok')
+              cy.get('a.btn.btn-primary.text-white').click()
+
+    
+          }
+        });
+      });
+    });
+  });
+
+Cypress.Commands.add('cashDepositApproval', () => {
+
+    cy.readFile('cypress/fixtures/testexample.json').then((data) => {
+        const transactionID = data.transactionID
+        
+
+        cy.get(testData.receiptNumberLocator).each(($row)=>{
+
+            cy.wrap($row).find('td:nth-child(3)').invoke('text').then((receiptnumbertext)=>{
+            const receiptnumber = receiptnumbertext.trim()
+            
+    
+                if(receiptnumber===transactionID){
+    
+                    
+                    cy.wrap($row).find('td:nth-child(1) .btn.btn-primary.btn-sm').click({force:true})
+                       
+                    cy.get(testData.confirmationModalTitleLocator, {timeout: 10000}).should('be.visible').and('contain.text', 'Transaction Details')
+                    cy.get(testData.approveButtonLocator).click()
+                    cy.get(testData.receiptLocator,{timeout: 30000}).scrollIntoView().should('be.visible')
+                    
+                }
+                
+           })
+        })
+            
+
+    })
+  
+        
+})
 
 Cypress.Commands.add('getInstrumentDate', (instrumentDate) => {
             var instrumentDate = instrumentDate.split('\\')

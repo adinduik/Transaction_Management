@@ -1,38 +1,73 @@
 {
-    
-    "_comment": "These are Locators",
-
-
-    "usernameLocator": "input[placeholder='Firstname.Lastname']", 
-    "passwordLocator": "input[placeholder='Password']",
-    "tokenLocator": "input[placeholder='Token']",
-    "nameLocator": "li[class='nav-item pr-2']",
-    "roleLocator": "li[class='nav-item pl-2 pr-2']:nth-child(3)",
-    "loginButtonLocator":".btn.rounded-btn",
-    "cashDepositLocator": "a[href='/deposit/cash-deposit']",
-    "depositAccountNumberLocator": "input[name= 'acct']",
-    "accountNumberValidatorLocator": ".btn.btn-outline-secondary.fa.fa-search",
-    "accountOwnerSelectorLocator": "input[value='Y']",
-    "depositAmountLocator": "input[name='wthAmount']",
-    "postTransactionLocator": ".col-sm-12.btn.btn-primary",
-    "confirmTransactionLocator": ".btn.btn-primary.btn-sm.btn-block",
-    "receiptLocator":"div.modal-content div.mb-5.pb-5 div.modal-body.receipt_font",
-    "approvalLocator": "div.modal-body.text-white.bg-danger.ng-star-inserted",
-
-
-
-
-    "_comment1": "These are Data Values",
-
-
-    "tellerDetails": ["Ikechukwu.Adindu", "Ani-j@@2222@@##", "16203"],  
-    "approverDetails": ["Adebowale.Adeyeba", "ESideRmENENACY@2024##", "9377"],
-    "depositAccountNumber": "9123719014",
-    "belowLimitDepositAmount": "100000",
-    "belowLimitAmountBreakdown": ["100", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-    "aboveLimitDepositAmount": "520000",
-    "aboveLimitAmountBreakdown": ["520", " ", " ", " ", " ", " ", " ", " ", " ", " "]    
-
-    
-
+  "_comment": "These are Locators",
+  "usernameLocator": "input[placeholder='Firstname.Lastname']",
+  "passwordLocator": "input[placeholder='Password']",
+  "tokenLocator": "input[placeholder='Token']",
+  "nameLocator": "li[class='nav-item pr-2']",
+  "roleLocator": "li[class='nav-item pl-2 pr-2']:nth-child(3)",
+  "loginButtonLocator": ".btn.rounded-btn",
+  "cashDepositLocator": "a[href='/deposit/cash-deposit']",
+  "depositAccountNumberLocator": "input[name= 'acct']",
+  "accountNumberValidatorLocator": ".btn.btn-outline-secondary.fa.fa-search",
+  "accountOwnerNameLocator": "table:nth-child(1) tr:nth-child(1) td:nth-child(1) span:nth-child(1)",
+  "accountOwnerSelectorLocator": "input[value='Y']",
+  "accountOwnerSelectorLocatorNo": "input[value='N']",
+  "depositorFirstNameLocator": "input[name='depFirstName']",
+  "depositorLastNameLocator": "input[name='depLastName']",
+  "depositorPhoneNumberLocator": "input[name='phoneNumber']",
+  "depositAmountLocator": "input[name='wthAmount']",
+  "postTransactionLocator": ".col-sm-12.btn.btn-primary",
+  "confirmTransactionLocator": ".btn.btn-primary.btn-sm.btn-block",
+  "receiptLocator": "div.modal-content div.mb-5.pb-5 div.modal-body.receipt_font",
+  "approvalLocator": "div.modal-body.text-white.bg-danger.ng-star-inserted",
+  "approvalLimitLocator": "div.nested-menu.ng-star-inserted a.list-group-item",
+  "cashDepositLimitLocator": "a[href='/cashofficers/deposit-limit']",
+  "receiptNumberLocator": "table tbody tr",
+  "confirmationModalTitleLocator": ".card-title.d-inline-block",
+  "approveButtonLocator": ".px-3.mr-4.btn.btn-primary.btn-sm",
+  "declineButtonLocator": ".px-3.btn.btn-danger.btn-sm",
+  "declineModalLocator": ".modal-title",
+  "_comment1": "These are Data Values",
+  "tellerDetails": [
+    "Ikechukwu.Adindu",
+    "Ani-j@@2222@@##",
+    "16203"
+  ],
+  "approverDetails": [
+    "Adebowale.Adeyeba",
+    "ESideRmENENACY@2024##",
+    "9377"
+  ],
+  "depositAccountNumber": "9123719014",
+  "accountOwnerName": "ADINDU IKECHUKWU UDOCHUKWU",
+  "depositorFirstName": "IKECHUKWU",
+  "depositorLastName": "ADINDU",
+  "depositorPhoneNumber": "08012345678",
+  "belowLimitDepositAmount": "100000",
+  "belowLimitAmountBreakdown": [
+    "100",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+  ],
+  "aboveLimitDepositAmount": "520000",
+  "aboveLimitAmountBreakdown": [
+    "520",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+  ],
+  "transactionID": "635019"
 }
