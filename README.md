@@ -1,12 +1,12 @@
 # SlipFree Automation Test Suite
 
-This project contains automated tests for the **SlipFree** application using Cypress. The tests are designed to validate key functionalities such as user login, role validation, cash deposit workflows, and transaction approval processes.
+This project contains automated tests for the **SlipFree** application using Cypress. The tests are designed to validate key functionalities such as user login, role validation, cash deposit workflows, transaction approval processes, and transaction decline scenarios.
 
 ---
 
 ## Project Overview
 
-The SlipFree application is a financial platform that facilitates cash deposit transactions. This test suite ensures that the application behaves as expected under various scenarios, including deposits within and above teller limits.
+The SlipFree application is a financial platform that facilitates cash deposit transactions. This test suite ensures that the application behaves as expected under various scenarios, including deposits within and above teller limits, as well as transaction approval and decline workflows.
 
 ### Key Features Tested:
 1. **User Authentication**:
@@ -22,6 +22,12 @@ The SlipFree application is a financial platform that facilitates cash deposit t
 
 4. **Approval Workflow**:
    - Handling transactions that exceed teller limits and require approver validation.
+
+5. **Decline Workflow**:
+   - Handling transactions that are declined by the approver.
+
+6. **Instrument Date Selection**:
+   - Validation of date selection for instruments.
 
 ---
 
@@ -51,6 +57,7 @@ The test data is stored in the `testexample.json` file and includes:
 - **`cashDepositLocator`**: Locator for the cash deposit navigation link.
 - **`depositAccountNumberLocator`**: Locator for the account number input field.
 - **`depositAmountLocator`**: Locator for the deposit amount input field.
+- **`receiptLocator`**: Locator for the receipt modal.
 
 ### User Credentials:
 - **`tellerDetails`**: Credentials for the teller user.
@@ -62,6 +69,7 @@ The test data is stored in the `testexample.json` file and includes:
 - **`belowLimitAmountBreakdown`**: Denomination breakdown for deposits within the teller limit.
 - **`aboveLimitDepositAmount`**: Deposit amount exceeding the teller limit.
 - **`aboveLimitAmountBreakdown`**: Denomination breakdown for deposits exceeding the teller limit.
+- **`transactionID`**: Transaction ID used for approval and decline workflows.
 
 ---
 
@@ -95,6 +103,36 @@ The test data is stored in the `testexample.json` file and includes:
 
 ---
 
+### 3. **Transaction Approval**
+- **Steps**:
+  1. Launch the application.
+  2. Log in as an approver.
+  3. Navigate to the approval page.
+  4. Select the transaction requiring approval.
+  5. Approve the transaction.
+  6. Validate the success message and receipt.
+
+- **Expected Outcome**:
+  - The transaction is successfully approved, and a receipt is displayed.
+
+---
+
+### 4. **Transaction Decline**
+- **Steps**:
+  1. Launch the application.
+  2. Log in as an approver.
+  3. Navigate to the approval page.
+  4. Select the transaction requiring approval.
+  5. Decline the transaction.
+  6. Provide a reason for the decline.
+  7. Validate the decline message.
+
+- **Expected Outcome**:
+  - The transaction is successfully declined, and the decline reason is recorded.
+
+
+---
+
 ## Custom Commands
 
 The `commands.js` file contains reusable Cypress commands to simplify test logic. Below are some key commands:
@@ -117,6 +155,12 @@ The `commands.js` file contains reusable Cypress commands to simplify test logic
 - **`cy.confirmCashDepositAboveLimit()`**:
   Validates transactions exceeding the teller limit.
 
+### Approval and Decline Commands:
+- **`cy.cashDepositApproval()`**:
+  Approves a transaction flagged for approval.
+- **`cy.cashDepositDecline()`**:
+  Declines a transaction flagged for approval.
+
 ### Validation Commands:
 - **`cy.validateRole(expectedRole)`**:
   Validates the logged-in user's role.
@@ -124,6 +168,7 @@ The `commands.js` file contains reusable Cypress commands to simplify test logic
   Validates the total amount displayed on the screen.
 - **`cy.validatePosting(isAboveLimit)`**:
   Validates the posting process for transactions.
+
 
 ---
 

@@ -352,21 +352,7 @@ Cypress.Commands.add('getInstrumentDate', (instrumentDate) => {
 
 
 
-Cypress.Commands.add('totalvalidation', (newtotal) => {
-    
-    cy.get('div.sc-whCvt div.sc-mIVWJ .sc-eKxxib').then(($total)=>{
 
-        const totaltext = $total.first().text()
-        var sumtotaltext = totaltext.split(" ")
-        var sumtotaltext = sumtotaltext[1].trim()
-        var total = parseInt(sumtotaltext)
-
-        expect(total).to.equal(Number(newtotal))
-
-
-    })
-        
-})
 
 
 
